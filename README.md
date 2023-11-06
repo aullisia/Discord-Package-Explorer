@@ -22,9 +22,8 @@ Special thanks to **rdbende** for creating the beatiful theme I used in the appl
 
 1. Download the most recent release from [Releases](https://github.com/aullisia/Discord-Package-Explorer/releases). (Under assets Discord-Package-Explorer.exe)
 2. Run the exe file
-
-The program should display an interface on the home page enter the file path to your Discord data package eg: "C:\Users\user\Desktop\package"
-You are now set up and you can start using the program!
+3. The program should display an interface on the home page enter the file path to your Discord data package eg: "C:\Users\user\Desktop\package".
+4. You are now set up and you can start using the program!
 
 ## License
 
