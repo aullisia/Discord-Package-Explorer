@@ -20,7 +20,7 @@ Special thanks to **rdbende** for creating the beatiful theme I used in the appl
 
 ## Getting Started
 
-For detailed instructions on how to use Discord Package Explorer and make the most of its features, please refer to our [documentation](link-to-your-documentation).
+Download the program
 
 ## License
 
