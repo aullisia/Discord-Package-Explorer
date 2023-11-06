@@ -1,0 +1,1 @@
+Use pyinstaller with this command: "pyinstaller --onefile --add-data "sv_ttk;sv_ttk" main.py"
