@@ -52,6 +52,8 @@ app = tk.Tk()
 app.title("Discord package explorer")
 app.geometry("1000x600")
 app.resizable(False, False)
+app.iconbitmap(default='./assets/icon.ico')
+
 
 #Theme
 sv_ttk.set_theme("dark")
@@ -81,12 +83,11 @@ def display_image(image_url, parent_frame):
         image_label.pack()
     except requests.exceptions.RequestException as e:
         print(f"Error downloading image: {e}")
-        placeholder_image_url = "https://icons.iconarchive.com/icons/iconarchive/fat-sugar-food/128/Pizza-icon.png"
-        placeholder_response = requests.get(placeholder_image_url)
-        placeholder_response.raise_for_status()
-        placeholder_image_bytes = placeholder_response.content
-        placeholder_image = Image.open(io.BytesIO(placeholder_image_bytes))
+        placeholder_image_path = "./assets/Placeholder_Avatar.jpg"  # Replace with the path to your placeholder image file
+        placeholder_image = Image.open(placeholder_image_path)
         placeholder_image_tk = ImageTk.PhotoImage(placeholder_image)
+
+        # Create a label for the placeholder image
         placeholder_label = tk.Label(parent_frame, image=placeholder_image_tk)
         placeholder_label.image = placeholder_image_tk
         placeholder_label.pack()
@@ -223,6 +224,12 @@ def handle_button_action(action):
 
         friend_users = friends.start(messages_folder, 1, int(config["Settings"]["minMessages"]), config["Settings"]["currentUserId"])
 
+        
+        maxcount = len(friend_users)
+        count = 0
+
+        print("Rendering images: ", maxcount)
+
         for user in friend_users:
             if 'global_name' in user[2] and user[2]['global_name']:
                 name = user[2]['global_name']
@@ -232,7 +239,7 @@ def handle_button_action(action):
             if 'avatar' in user[2] and 'link' in user[2]['avatar']:
                 avatar_img_link = user[2]['avatar']['link']
             else:
-                avatar_img_link = "https://icons.iconarchive.com/icons/iconarchive/fat-sugar-food/128/Pizza-icon.png"
+                avatar_img_link = None
 
             message_link = user[1]
             #Create an image using the profile picture and a name to the right of it
@@ -254,6 +261,9 @@ def handle_button_action(action):
                 name_label.bind("<Button-1>", lambda e: on_avatar_click())
 
             create_avatar_frame(friends_avatars_container, avatar_img_link, name, message_link)
+
+            count = count+1
+            print(f"Progress: {count} / {maxcount}")
 
 
 
