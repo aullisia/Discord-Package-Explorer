@@ -52,7 +52,7 @@ app = tk.Tk()
 app.title("Discord package explorer")
 app.geometry("1000x600")
 app.resizable(False, False)
-app.iconbitmap(default='./assets/icon.ico')
+#app.iconbitmap(default='./assets/icon.ico')
 
 
 #Theme
@@ -61,6 +61,10 @@ sv_ttk.set_theme("dark")
 
 def check_file_exists(file_path):
     return os.path.exists(file_path)
+
+def create_blank_image(width, height):
+    image = Image.new("RGB", (width, height), "white")
+    return image
 
 def display_image(image_url, parent_frame):
     try:
@@ -83,8 +87,10 @@ def display_image(image_url, parent_frame):
         image_label.pack()
     except requests.exceptions.RequestException as e:
         print(f"Error downloading image: {e}")
-        placeholder_image_path = "./assets/Placeholder_Avatar.jpg"  # Replace with the path to your placeholder image file
-        placeholder_image = Image.open(placeholder_image_path)
+
+        # Create a blank white image as a placeholder
+        width, height = 128, 128
+        placeholder_image = create_blank_image(width, height)
         placeholder_image_tk = ImageTk.PhotoImage(placeholder_image)
 
         # Create a label for the placeholder image
@@ -233,6 +239,8 @@ def handle_button_action(action):
         for user in friend_users:
             if 'global_name' in user[2] and user[2]['global_name']:
                 name = user[2]['global_name']
+            elif 'tag' in user[2] and user[2]['tag']:
+                name = user[2]['tag']
             else:
                 name = "PlaceHolder"
             
